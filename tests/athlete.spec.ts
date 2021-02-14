@@ -1,12 +1,15 @@
 import { isGetAccessor } from "typescript";
-import { Athlete, AthleteDetails } from "../datamodel/athlete";
+import { Athlete } from "../datamodel/athlete";
 
 describe("Creating athlete", () => {
   let athlete: Athlete;
   beforeAll(() => {
     athlete = new Athlete(
       "testId",
-      new AthleteDetails("Konstantinos", "Tsirakos", 24)
+      "Konstantinos",
+      "Tsirakos",
+      24,
+      "testOktaId1"
     );
   });
   it("Id is correct", () => {
@@ -14,13 +17,11 @@ describe("Creating athlete", () => {
   });
 
   describe("Details are correct", () => {
+    it("Name is correct", () => expect(athlete.name).toBe("Konstantinos"));
+    it("Surname is correct", () => expect(athlete.surname).toBe("Tsirakos"));
+    it("Age is correct", () => expect(athlete.age).toBe(24));
     it("Name is correct", () =>
-      expect(athlete.details.name).toBe("Konstantinos"));
-    it("Surname is correct", () =>
-      expect(athlete.details.surname).toBe("Tsirakos"));
-    it("Age is correct", () => expect(athlete.details.age).toBe(24));
-    it("Name is correct", () =>
-      expect(athlete.details.fullname).toBe("Konstantinos Tsirakos"));
+      expect(athlete.fullname).toBe("Konstantinos Tsirakos"));
   });
 
   describe("Setters", () => {

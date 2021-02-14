@@ -1,32 +1,30 @@
 import { Athlete, AthleteId, AthleteJSON } from "./athlete";
+import { User } from "./user";
 
 export type TrainerId = string;
-export interface TrainerDetails {
+
+export interface TrainerJSON {
+  id: string;
   name: string;
   surname: string;
   fullname: string;
   age: number;
-}
-
-export class TrainerDetails {
-  public fullname: string;
-  constructor(public name: string, public surname: string, public age: number) {
-    this.fullname = [this.name, this.surname].join(" ");
-  }
-}
-
-export interface TrainerJSON {
-  id: string;
-  details: TrainerDetails;
+  oktaId: string;
+  type: string;
   athletes: AthleteJSON[];
 }
 
-export class Trainer {
+export class Trainer extends User {
   constructor(
-    public id: TrainerId,
-    public details: TrainerDetails,
+    id: string,
+    name: string,
+    surname: string,
+    age: number,
+    oktaId: string,
     public athletes: Athlete[]
-  ) {}
+  ) {
+    super(id, name, surname, age, oktaId, "trainer");
+  }
 
   setAthletes(athletes: Athlete[]) {
     this.athletes = athletes;
@@ -55,6 +53,13 @@ export class Trainer {
       Athlete.prototype.fromJSON(elem)
     );
 
-    return new Trainer(json.id, json.details, athletes);
+    return new Trainer(
+      json.id,
+      json.name,
+      json.surname,
+      json.age,
+      json.oktaId,
+      athletes
+    );
   }
 }

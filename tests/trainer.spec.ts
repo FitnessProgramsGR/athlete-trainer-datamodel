@@ -1,13 +1,16 @@
 import { isGetAccessor, isRegularExpressionLiteral } from "typescript";
-import { Athlete, AthleteDetails } from "../datamodel/athlete";
-import { Trainer, TrainerDetails } from "../datamodel/trainer";
+import { Athlete } from "../datamodel/athlete";
+import { Trainer } from "../datamodel/trainer";
 
 describe("Creating Trainer", () => {
   let trainer: Trainer;
   beforeAll(() => {
     trainer = new Trainer(
       "testTrainer",
-      new TrainerDetails("Dimitris", "Tsirakos", 53),
+      "Dimitris",
+      "Tsirakos",
+      53,
+      "oktaId1",
       []
     );
   });
@@ -17,25 +20,21 @@ describe("Creating Trainer", () => {
   });
 
   describe("Details are correct", () => {
-    it("Name is correct", () => expect(trainer.details.name).toBe("Dimitris"));
-    it("Surname is correct", () =>
-      expect(trainer.details.surname).toBe("Tsirakos"));
-    it("Age is correct", () => expect(trainer.details.age).toBe(53));
+    it("Name is correct", () => expect(trainer.name).toBe("Dimitris"));
+    it("Surname is correct", () => expect(trainer.surname).toBe("Tsirakos"));
+    it("Age is correct", () => expect(trainer.age).toBe(53));
     it("Name is correct", () =>
-      expect(trainer.details.fullname).toBe("Dimitris Tsirakos"));
+      expect(trainer.fullname).toBe("Dimitris Tsirakos"));
   });
 
   describe("Set athletes as an array", () => {
     let athletes: Athlete[] = [];
     beforeAll(() => {
       athletes.push(
-        new Athlete(
-          "testId1",
-          new AthleteDetails("Konstantinos", "Tsirakos", 24)
-        )
+        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaId2")
       );
       athletes.push(
-        new Athlete("testId2", new AthleteDetails("Giorgos", "Tsirakos", 24))
+        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3")
       );
 
       trainer.setAthletes(athletes);
@@ -70,13 +69,10 @@ describe("Creating Trainer", () => {
     let athletes: Athlete[] = [];
     beforeAll(() => {
       athletes.push(
-        new Athlete(
-          "testId1",
-          new AthleteDetails("Konstantinos", "Tsirakos", 24)
-        )
+        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaIs2")
       );
       athletes.push(
-        new Athlete("testId2", new AthleteDetails("Giorgos", "Tsirakos", 24))
+        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3")
       );
 
       trainer.addAthlete(athletes[0]);
