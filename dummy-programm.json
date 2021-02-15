@@ -1,0 +1,45 @@
+{
+  "id": "testProgramId",
+  "trainer": "testTrainerId",
+  "sections": [
+    {
+      "name": "Warm up",
+      "entries": [
+        {
+          "type": "serial",
+          "exercises": [
+            { "id": "exec1", "type": "multiset", "reps": [10, 8, 6, 4] },
+            { "id": "exec2", "type": "multiset", "reps": [10, 8, 6, 4] },
+            { "id": "exec3", "type": "multiset", "reps": [10, 8, 6, 4] },
+            { "id": "exec4", "type": "multiset", "reps": [10, 8, 6, 4] }
+          ],
+          "rounds": 0
+        }
+      ]
+    },
+    {
+      "name": "Core",
+      "entries": [
+        {
+          "type": "round",
+          "exercises": [
+            { "id": "exec5", "type": "singleset", "reps": [10] },
+            { "id": "exec6", "type": "singleset", "reps": [10] },
+            { "id": "exec7", "type": "singleset", "reps": [10] }
+          ],
+          "rounds": 2
+        },
+        {
+          "type": "superset",
+          "exercise1": { "id": "exec8", "type": "singleset", "reps": [10] },
+          "exercise2": { "id": "exec9", "type": "singleset", "reps": [10] },
+          "rounds": 2,
+          "exercises": [
+            { "id": "exec8", "type": "singleset", "reps": [10] },
+            { "id": "exec9", "type": "singleset", "reps": [10] }
+          ]
+        }
+      ]
+    }
+  ]
+}
