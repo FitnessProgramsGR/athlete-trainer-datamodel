@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
     "target": "es6",
-    "module": "commonjs",
-    "sourceMap": true
-  }
+    "outDir": "dist"
+  },
+  "include": ["scripts/**/*", "./datamodel"],
+  "exclude": ["dist"]
 }

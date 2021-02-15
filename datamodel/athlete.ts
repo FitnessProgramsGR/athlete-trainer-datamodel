@@ -1,6 +1,4 @@
-import { TrainerId } from "./trainer";
-import { ExerciseDay, Program, ProgramJSON } from "./programm";
-import { User, UserType } from "./user";
+import { User } from "./user";
 
 export type AthleteId = string;
 
