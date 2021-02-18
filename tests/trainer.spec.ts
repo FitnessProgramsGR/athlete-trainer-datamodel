@@ -13,6 +13,7 @@ describe("Creating Trainer", () => {
       "oktaId1",
       []
     );
+    console.log(JSON.stringify(trainer.toJSON()))
   });
 
   it("Id is correct", () => {

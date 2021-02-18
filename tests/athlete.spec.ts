@@ -11,6 +11,7 @@ describe("Creating athlete", () => {
       24,
       "testOktaId1"
     );
+    console.log(JSON.stringify(athlete.toJSON()))
   });
   it("Id is correct", () => {
     expect(athlete.id).toBe("testId");
