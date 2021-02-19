@@ -45,8 +45,8 @@ export class Athlete extends User {
 
   toJSON(): AthleteJSON {
     return Object.assign({}, this, {
-      trainer: this.trainer ? this.trainer : undefined,
-      program: this.program,
+      trainer: this.trainer ? this.trainer : '',
+      program: this.program ? this.program : '',
     });
   }
 

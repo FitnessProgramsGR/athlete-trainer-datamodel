@@ -94,11 +94,11 @@ export interface ProgramSectionJSON {
 
 export interface ProgramSection {
   name: string;
-  entries: ExerciseCategory[];
+  entries: AnyExerciseCategory[];
 }
 
 export class ProgramSection {
-  constructor(public name: string, public entries: ExerciseCategory[]) {}
+  constructor(public name: string, public entries: AnyExerciseCategory[]) {}
 
   toJSON(): ProgramSectionJSON {
     return Object.assign({}, this, {
