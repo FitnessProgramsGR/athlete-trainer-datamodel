@@ -1,4 +1,4 @@
-export interface User {}
+export interface User { }
 
 export interface UserJSON {
   id: string;
@@ -12,7 +12,11 @@ export interface UserJSON {
 
 export type UserType = "trainer" | "athlete";
 
-export class User implements User {
+export class Serializable {
+  constructor(public id: string) {}
+}
+
+export class User extends Serializable implements User {
   public fullname: string;
   constructor(
     public id: string,
@@ -22,6 +26,8 @@ export class User implements User {
     public oktaId: string,
     public type: UserType
   ) {
+    super(id)
     this.fullname = [this.name, this.surname].join(" ");
   }
 }
+

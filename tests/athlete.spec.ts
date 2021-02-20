@@ -1,5 +1,5 @@
 import { isGetAccessor } from "typescript";
-import { Athlete } from "../datamodel/athlete";
+import { Athlete } from "../src/athlete";
 
 describe("Creating athlete", () => {
   let athlete: Athlete;

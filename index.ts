@@ -2,14 +2,15 @@
  * Exports for using the Datamodel
  */
 
-export { Athlete, AthleteId, AthleteJSON } from "./datamodel/athlete";
+export {Serializable } from "./src/user"
+export { Athlete, AthleteId, AthleteJSON } from "./src/athlete";
 
 export {
   ExerciseTypes,
   SingleSetExercise,
   MultiSetExercise,
   ExerciseJSON,
-} from "./datamodel/exercise";
+} from "./src/exercise";
 
 export {
   WeeklyProgramm,
@@ -25,6 +26,6 @@ export {
   ProgramSectionJSON,
   Program,
   ProgramJSON,
-} from "./datamodel/programm";
+} from "./src/programm";
 
-export { Trainer, TrainerId, TrainerJSON } from "./datamodel/trainer";
+export { Trainer, TrainerId, TrainerJSON } from "./src/trainer";

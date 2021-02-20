@@ -10,7 +10,11 @@ export interface UserJSON {
     type: string;
 }
 export declare type UserType = "trainer" | "athlete";
-export declare class User implements User {
+export declare class Serializable {
+    id: string;
+    constructor(id: string);
+}
+export declare class User extends Serializable implements User {
     id: string;
     name: string;
     surname: string;
