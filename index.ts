@@ -2,7 +2,7 @@
  * Exports for using the Datamodel
  */
 
-export {Serializable } from "./src/user"
+export { Serializable } from "./src/user"
 export { Athlete, AthleteId, AthleteJSON } from "./src/athlete";
 
 export {
