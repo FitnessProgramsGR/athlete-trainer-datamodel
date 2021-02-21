@@ -13,14 +13,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = exports.Serializable = void 0;
-var Serializable = /** @class */ (function () {
-    function Serializable(id) {
-        this.id = id;
-    }
-    return Serializable;
-}());
-exports.Serializable = Serializable;
+exports.User = void 0;
+var helpers_1 = require("./helpers");
 var User = /** @class */ (function (_super) {
     __extends(User, _super);
     function User(id, name, surname, age, oktaId, type) {
@@ -35,6 +29,6 @@ var User = /** @class */ (function (_super) {
         return _this;
     }
     return User;
-}(Serializable));
+}(helpers_1.Serializable));
 exports.User = User;
 //# sourceMappingURL=user.js.map

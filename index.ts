@@ -2,7 +2,7 @@
  * Exports for using the Datamodel
  */
 
-export { Serializable } from "./src/user"
+export { Serializable } from "./src/helpers"
 export { Athlete, AthleteId, AthleteJSON } from "./src/athlete";
 
 export {
@@ -10,6 +10,11 @@ export {
   SingleSetExercise,
   MultiSetExercise,
   ExerciseJSON,
+  ExerciseEntry,
+  ExerciseEntryId,
+  ExerciseEntryJSON,
+  Muscle,
+  MuscleJSON,
 } from "./src/exercise";
 
 export {
@@ -29,3 +34,11 @@ export {
 } from "./src/programm";
 
 export { Trainer, TrainerId, TrainerJSON } from "./src/trainer";
+
+export { 
+  MediaEntryJSON, 
+  MediaEntryType, 
+  AnyMediaEntry, 
+  ImageMedia, 
+  VideoMedia 
+} from "./src/media"

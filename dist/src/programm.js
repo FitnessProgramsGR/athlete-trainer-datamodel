@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Program = exports.ProgramSection = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
+var helpers_1 = require("./helpers");
 var WeeklyProgramm = /** @class */ (function () {
     function WeeklyProgramm(monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
         this.monday = monday;
@@ -107,11 +108,14 @@ var ProgramSection = /** @class */ (function () {
     return ProgramSection;
 }());
 exports.ProgramSection = ProgramSection;
-var Program = /** @class */ (function () {
+var Program = /** @class */ (function (_super) {
+    __extends(Program, _super);
     function Program(id, trainer, sections) {
-        this.id = id;
-        this.trainer = trainer;
-        this.sections = sections;
+        var _this = _super.call(this, id) || this;
+        _this.id = id;
+        _this.trainer = trainer;
+        _this.sections = sections;
+        return _this;
     }
     Program.prototype.toJSON = function () {
         return Object.assign({}, this, {
@@ -119,6 +123,6 @@ var Program = /** @class */ (function () {
         });
     };
     return Program;
-}());
+}(helpers_1.Serializable));
 exports.Program = Program;
 //# sourceMappingURL=programm.js.map

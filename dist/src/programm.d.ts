@@ -1,4 +1,5 @@
 import { ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
+import { Serializable } from "./helpers";
 export interface WeeklyProgrammJSON {
     monday: ProgramJSON;
     tuesday: ProgramJSON;
@@ -67,7 +68,7 @@ export interface ProgramJSON {
     trainer: string;
     sections: ProgramSectionJSON[];
 }
-export declare class Program {
+export declare class Program extends Serializable {
     id: string;
     trainer: string;
     sections: ProgramSection[];

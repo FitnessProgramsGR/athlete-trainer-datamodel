@@ -13,14 +13,52 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MultiSetExercise = exports.SingleSetExercise = void 0;
-var Exercise = /** @class */ (function () {
+exports.MultiSetExercise = exports.SingleSetExercise = exports.ExerciseEntry = exports.Muscle = void 0;
+var helpers_1 = require("./helpers");
+var Muscle = /** @class */ (function (_super) {
+    __extends(Muscle, _super);
+    function Muscle(id, name) {
+        var _this = _super.call(this, id) || this;
+        _this.id = id;
+        _this.name = name;
+        return _this;
+    }
+    Muscle.prototype.toJSON = function () {
+        return Object.assign({}, this);
+    };
+    return Muscle;
+}(helpers_1.Serializable));
+exports.Muscle = Muscle;
+var ExerciseEntry = /** @class */ (function (_super) {
+    __extends(ExerciseEntry, _super);
+    function ExerciseEntry(id, name, description, muscles, media) {
+        var _this = _super.call(this, id) || this;
+        _this.id = id;
+        _this.name = name;
+        _this.description = description;
+        _this.muscles = muscles;
+        _this.media = media;
+        return _this;
+    }
+    ExerciseEntry.prototype.toJSON = function () {
+        return Object.assign({}, this, {
+            muscles: this.muscles.map(function (elem) { return elem.toJSON(); }),
+            media: this.media.map(function (elem) { return elem.toJSON(); })
+        });
+    };
+    return ExerciseEntry;
+}(helpers_1.Serializable));
+exports.ExerciseEntry = ExerciseEntry;
+var Exercise = /** @class */ (function (_super) {
+    __extends(Exercise, _super);
     function Exercise(id, type) {
-        this.id = id;
-        this.type = type;
+        var _this = _super.call(this, id) || this;
+        _this.id = id;
+        _this.type = type;
+        return _this;
     }
     return Exercise;
-}());
+}(helpers_1.Serializable));
 var SingleSetExercise = /** @class */ (function (_super) {
     __extends(SingleSetExercise, _super);
     function SingleSetExercise(id, reps) {
