@@ -1,4 +1,5 @@
 import { ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
+import { Serializable } from "./helpers";
 
 export interface WeeklyProgrammJSON {
   monday: ProgramJSON;
@@ -113,12 +114,14 @@ export interface ProgramJSON {
   sections: ProgramSectionJSON[];
 }
 
-export class Program {
+export class Program extends Serializable{
   constructor(
     public id: string,
     public trainer: string,
     public sections: ProgramSection[]
-  ) {}
+  ) {
+    super(id)
+  }
 
   toJSON(): ProgramJSON {
     return Object.assign({}, this, {

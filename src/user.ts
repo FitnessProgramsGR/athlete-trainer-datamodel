@@ -1,3 +1,5 @@
+import { Serializable } from "./helpers";
+
 export interface User { }
 
 export interface UserJSON {
@@ -12,9 +14,6 @@ export interface UserJSON {
 
 export type UserType = "trainer" | "athlete";
 
-export class Serializable {
-  constructor(public id: string) {}
-}
 
 export class User extends Serializable implements User {
   public fullname: string;

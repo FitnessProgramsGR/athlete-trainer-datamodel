@@ -1,4 +1,3 @@
-import { isGetAccessor } from "typescript";
 import { Athlete } from "../src/athlete";
 
 describe("Creating athlete", () => {

@@ -1,11 +1,11 @@
-import { MultiSetExercise, SingleSetExercise } from "../datamodel/exercise";
+import { MultiSetExercise, SingleSetExercise } from "../src/exercise";
 import {
   Program,
   ProgramSection,
   Round,
   Serial,
   Superset,
-} from "../datamodel/programm";
+} from "../src/programm";
 
 describe("Create Serial Program", () => {
   let programm: Program;
