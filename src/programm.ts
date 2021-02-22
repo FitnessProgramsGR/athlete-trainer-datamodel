@@ -1,4 +1,4 @@
-import { ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
+import { ExerciseInstanceParser, ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
 import { Serializable } from "./helpers";
 
 export interface WeeklyProgrammJSON {
@@ -19,7 +19,7 @@ export class WeeklyProgramm {
     public friday: Program,
     public saturday: Program,
     public sunday: Program
-  ) {}
+  ) { }
 
   toJSON(): WeeklyProgrammJSON {
     return Object.assign({}, this, {
@@ -43,7 +43,12 @@ export interface ExerciseCategoryJSON {
 }
 
 export class ExerciseCategory {
-  constructor(public type: Categories) {}
+  constructor(public type: Categories) { }
+}
+
+export interface RoundCategoryJSON {
+  exercises: ExerciseJSON[],
+  rounds: number
 }
 
 export class Round extends ExerciseCategory {
@@ -56,6 +61,19 @@ export class Round extends ExerciseCategory {
       exercises: this.exercises.map((elem: SingleSetExercise) => elem.toJSON()),
     });
   }
+
+  fromJSON(json: RoundCategoryJSON) {
+    const entries = json.exercises.map(
+      (elem: ExerciseJSON) => ExerciseInstanceParser.prototype.fromJSON(elem)
+    ) as SingleSetExercise[]
+
+    return new Round(entries, json.rounds)
+  }
+}
+
+export interface SupersetCategoryJSON {
+  exercises: ExerciseJSON[],
+  rounds: number
 }
 
 export class Superset extends ExerciseCategory {
@@ -72,6 +90,18 @@ export class Superset extends ExerciseCategory {
       exercises: [this.exercise1.toJSON(), this.exercise2.toJSON()],
     });
   }
+
+  fromJSON(json: SupersetCategoryJSON): Superset {
+    return new Superset(
+      ExerciseInstanceParser.prototype.fromJSON(json.exercises[0]) as SingleSetExercise,
+      ExerciseInstanceParser.prototype.fromJSON(json.exercises[1]) as SingleSetExercise,
+      json.rounds
+    )
+  }
+}
+
+export interface SerialCategoryJSON {
+  exercises: ExerciseJSON[]
 }
 
 export class Serial extends ExerciseCategory {
@@ -85,9 +115,39 @@ export class Serial extends ExerciseCategory {
       rounds: 0,
     });
   }
+
+  fromJSON(json: SerialCategoryJSON): Serial {
+
+    const entries: MultiSetExercise[] = json.exercises.map((
+      elem: ExerciseJSON) => ExerciseInstanceParser.prototype.fromJSON(elem)
+    ) as MultiSetExercise[]
+
+    return new Serial(entries)
+  }
 }
+
 export type AnyExerciseCategory = Round | Serial | Superset;
 
+export class ExerciseCategoryArrayParser {
+  constructor() { }
+
+  fromJSON(json: ExerciseCategoryJSON): AnyExerciseCategory {
+    switch (json.type) {
+      case 'serial': {
+        return Serial.prototype.fromJSON(json as SerialCategoryJSON)
+      }
+      case 'superset': {
+        return Superset.prototype.fromJSON(json as SupersetCategoryJSON)
+      }
+      case 'round': {
+        return Round.prototype.fromJSON(json as RoundCategoryJSON)
+      }
+      default: {
+        throw (`Not known type of exercise ${json.type}`);
+      }
+    }
+  }
+}
 export interface ProgramSectionJSON {
   name: string;
   entries: ExerciseCategoryJSON[];
@@ -99,12 +159,19 @@ export interface ProgramSection {
 }
 
 export class ProgramSection {
-  constructor(public name: string, public entries: AnyExerciseCategory[]) {}
+  constructor(public name: string, public entries: AnyExerciseCategory[]) { }
 
   toJSON(): ProgramSectionJSON {
     return Object.assign({}, this, {
       entries: this.entries.map((elem: AnyExerciseCategory) => elem.toJSON()),
     });
+  }
+
+  fromJSON(json: ProgramSectionJSON): ProgramSection {
+    const entries: AnyExerciseCategory[] = json.entries.map(
+      (elem: ExerciseCategoryJSON) => ExerciseCategoryArrayParser.prototype.fromJSON(elem)
+    )
+    return new ProgramSection(json.name, entries)
   }
 }
 
@@ -114,7 +181,7 @@ export interface ProgramJSON {
   sections: ProgramSectionJSON[];
 }
 
-export class Program extends Serializable{
+export class Program extends Serializable {
   constructor(
     public id: string,
     public trainer: string,
@@ -127,5 +194,16 @@ export class Program extends Serializable{
     return Object.assign({}, this, {
       sections: this.sections.map((elem: ProgramSection) => elem.toJSON()),
     });
+  }
+
+  fromJSON(json: ProgramJSON): Program {
+    const sections = json.sections.map(
+      (elem: ProgramSectionJSON) => ProgramSection.prototype.fromJSON(elem)
+    )
+
+    return new Program(
+      json.id,
+      json.trainer,
+      sections)
   }
 }

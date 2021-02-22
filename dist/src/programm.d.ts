@@ -30,11 +30,20 @@ export declare class ExerciseCategory {
     type: Categories;
     constructor(type: Categories);
 }
+export interface RoundCategoryJSON {
+    exercises: ExerciseJSON[];
+    rounds: number;
+}
 export declare class Round extends ExerciseCategory {
     exercises: SingleSetExercise[];
     rounds: number;
     constructor(exercises: SingleSetExercise[], rounds: number);
     toJSON(): ExerciseCategoryJSON;
+    fromJSON(json: RoundCategoryJSON): Round;
+}
+export interface SupersetCategoryJSON {
+    exercises: ExerciseJSON[];
+    rounds: number;
 }
 export declare class Superset extends ExerciseCategory {
     exercise1: SingleSetExercise;
@@ -42,13 +51,22 @@ export declare class Superset extends ExerciseCategory {
     rounds: number;
     constructor(exercise1: SingleSetExercise, exercise2: SingleSetExercise, rounds: number);
     toJSON(): ExerciseCategoryJSON;
+    fromJSON(json: SupersetCategoryJSON): Superset;
+}
+export interface SerialCategoryJSON {
+    exercises: ExerciseJSON[];
 }
 export declare class Serial extends ExerciseCategory {
     exercises: MultiSetExercise[];
     constructor(exercises: MultiSetExercise[]);
     toJSON(): ExerciseCategoryJSON;
+    fromJSON(json: SerialCategoryJSON): Serial;
 }
 export declare type AnyExerciseCategory = Round | Serial | Superset;
+export declare class ExerciseCategoryArrayParser {
+    constructor();
+    fromJSON(json: ExerciseCategoryJSON): AnyExerciseCategory;
+}
 export interface ProgramSectionJSON {
     name: string;
     entries: ExerciseCategoryJSON[];
@@ -62,6 +80,7 @@ export declare class ProgramSection {
     entries: AnyExerciseCategory[];
     constructor(name: string, entries: AnyExerciseCategory[]);
     toJSON(): ProgramSectionJSON;
+    fromJSON(json: ProgramSectionJSON): ProgramSection;
 }
 export interface ProgramJSON {
     id: string;
@@ -74,4 +93,5 @@ export declare class Program extends Serializable {
     sections: ProgramSection[];
     constructor(id: string, trainer: string, sections: ProgramSection[]);
     toJSON(): ProgramJSON;
+    fromJSON(json: ProgramJSON): Program;
 }

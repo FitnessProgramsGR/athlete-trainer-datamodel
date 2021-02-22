@@ -58,11 +58,10 @@ export class ExerciseEntry extends Serializable {
 ///////////////////
 
 export interface ExerciseJSON {
-  id: string;
+  id: ExerciseEntryId;
   reps: number[];
-  type: string;
+  type: ExerciseTypes;
 }
-
 
 
 export type ExerciseTypes = "multiset" | "singleset";
@@ -71,6 +70,11 @@ class Exercise extends Serializable {
   constructor(public id: ExerciseEntryId, public type: ExerciseTypes) {
     super(id)
   }
+}
+
+export interface SinglesetExerciseJSON {
+  id: ExerciseEntryId,
+  reps: number[]
 }
 
 export class SingleSetExercise extends Exercise {
@@ -83,6 +87,16 @@ export class SingleSetExercise extends Exercise {
       reps: [this.reps],
     });
   }
+
+  fromJSON(json: SinglesetExerciseJSON): SingleSetExercise {
+    return new SingleSetExercise(json.id, json.reps[0])
+  }
+}
+
+
+export interface MultiSetExerciseJSON {
+  id: ExerciseEntryId,
+  reps: number[]
 }
 
 export class MultiSetExercise extends Exercise {
@@ -92,5 +106,29 @@ export class MultiSetExercise extends Exercise {
 
   toJSON(): ExerciseJSON {
     return Object.assign({}, this);
+  }
+
+  fromJSON(json: MultiSetExerciseJSON): MultiSetExercise {
+    return new MultiSetExercise(json.id, json.reps)
+  }
+}
+
+export type AnyExercise = SingleSetExercise | MultiSetExercise
+
+export class ExerciseInstanceParser {
+  constructor() { }
+
+  fromJSON(json: ExerciseJSON): AnyExercise {
+    switch (json.type) {
+      case 'multiset': {
+        return MultiSetExercise.prototype.fromJSON(json as MultiSetExerciseJSON)
+      }
+      case 'singleset': {
+        return SingleSetExercise.prototype.fromJSON(json as SinglesetExerciseJSON)
+      }
+      default: {
+        throw(`Not known type of set ${json.type}`)
+      }
+    }
   }
 }

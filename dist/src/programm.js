@@ -13,7 +13,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Program = exports.ProgramSection = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
+exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
+var exercise_1 = require("./exercise");
 var helpers_1 = require("./helpers");
 var WeeklyProgramm = /** @class */ (function () {
     function WeeklyProgramm(monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
@@ -59,6 +60,10 @@ var Round = /** @class */ (function (_super) {
             exercises: this.exercises.map(function (elem) { return elem.toJSON(); }),
         });
     };
+    Round.prototype.fromJSON = function (json) {
+        var entries = json.exercises.map(function (elem) { return exercise_1.ExerciseInstanceParser.prototype.fromJSON(elem); });
+        return new Round(entries, json.rounds);
+    };
     return Round;
 }(ExerciseCategory));
 exports.Round = Round;
@@ -76,6 +81,9 @@ var Superset = /** @class */ (function (_super) {
             exercises: [this.exercise1.toJSON(), this.exercise2.toJSON()],
         });
     };
+    Superset.prototype.fromJSON = function (json) {
+        return new Superset(exercise_1.ExerciseInstanceParser.prototype.fromJSON(json.exercises[0]), exercise_1.ExerciseInstanceParser.prototype.fromJSON(json.exercises[1]), json.rounds);
+    };
     return Superset;
 }(ExerciseCategory));
 exports.Superset = Superset;
@@ -92,9 +100,35 @@ var Serial = /** @class */ (function (_super) {
             rounds: 0,
         });
     };
+    Serial.prototype.fromJSON = function (json) {
+        var entries = json.exercises.map(function (elem) { return exercise_1.ExerciseInstanceParser.prototype.fromJSON(elem); });
+        return new Serial(entries);
+    };
     return Serial;
 }(ExerciseCategory));
 exports.Serial = Serial;
+var ExerciseCategoryArrayParser = /** @class */ (function () {
+    function ExerciseCategoryArrayParser() {
+    }
+    ExerciseCategoryArrayParser.prototype.fromJSON = function (json) {
+        switch (json.type) {
+            case 'serial': {
+                return Serial.prototype.fromJSON(json);
+            }
+            case 'superset': {
+                return Superset.prototype.fromJSON(json);
+            }
+            case 'round': {
+                return Round.prototype.fromJSON(json);
+            }
+            default: {
+                throw ("Not known type of exercise " + json.type);
+            }
+        }
+    };
+    return ExerciseCategoryArrayParser;
+}());
+exports.ExerciseCategoryArrayParser = ExerciseCategoryArrayParser;
 var ProgramSection = /** @class */ (function () {
     function ProgramSection(name, entries) {
         this.name = name;
@@ -104,6 +138,10 @@ var ProgramSection = /** @class */ (function () {
         return Object.assign({}, this, {
             entries: this.entries.map(function (elem) { return elem.toJSON(); }),
         });
+    };
+    ProgramSection.prototype.fromJSON = function (json) {
+        var entries = json.entries.map(function (elem) { return ExerciseCategoryArrayParser.prototype.fromJSON(elem); });
+        return new ProgramSection(json.name, entries);
     };
     return ProgramSection;
 }());
@@ -121,6 +159,10 @@ var Program = /** @class */ (function (_super) {
         return Object.assign({}, this, {
             sections: this.sections.map(function (elem) { return elem.toJSON(); }),
         });
+    };
+    Program.prototype.fromJSON = function (json) {
+        var sections = json.sections.map(function (elem) { return ProgramSection.prototype.fromJSON(elem); });
+        return new Program(json.id, json.trainer, sections);
     };
     return Program;
 }(helpers_1.Serializable));

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MultiSetExercise = exports.SingleSetExercise = exports.ExerciseEntry = exports.Muscle = void 0;
+exports.ExerciseInstanceParser = exports.MultiSetExercise = exports.SingleSetExercise = exports.ExerciseEntry = exports.Muscle = void 0;
 var helpers_1 = require("./helpers");
 var Muscle = /** @class */ (function (_super) {
     __extends(Muscle, _super);
@@ -72,6 +72,9 @@ var SingleSetExercise = /** @class */ (function (_super) {
             reps: [this.reps],
         });
     };
+    SingleSetExercise.prototype.fromJSON = function (json) {
+        return new SingleSetExercise(json.id, json.reps[0]);
+    };
     return SingleSetExercise;
 }(Exercise));
 exports.SingleSetExercise = SingleSetExercise;
@@ -86,7 +89,29 @@ var MultiSetExercise = /** @class */ (function (_super) {
     MultiSetExercise.prototype.toJSON = function () {
         return Object.assign({}, this);
     };
+    MultiSetExercise.prototype.fromJSON = function (json) {
+        return new MultiSetExercise(json.id, json.reps);
+    };
     return MultiSetExercise;
 }(Exercise));
 exports.MultiSetExercise = MultiSetExercise;
+var ExerciseInstanceParser = /** @class */ (function () {
+    function ExerciseInstanceParser() {
+    }
+    ExerciseInstanceParser.prototype.fromJSON = function (json) {
+        switch (json.type) {
+            case 'multiset': {
+                return MultiSetExercise.prototype.fromJSON(json);
+            }
+            case 'singleset': {
+                return SingleSetExercise.prototype.fromJSON(json);
+            }
+            default: {
+                throw ("Not known type of set " + json.type);
+            }
+        }
+    };
+    return ExerciseInstanceParser;
+}());
+exports.ExerciseInstanceParser = ExerciseInstanceParser;
 //# sourceMappingURL=exercise.js.map
