@@ -32,10 +32,10 @@ describe("Creating Trainer", () => {
     let athletes: Athlete[] = [];
     beforeAll(() => {
       athletes.push(
-        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaId2")
+        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaId2", 'testTrainer')
       );
       athletes.push(
-        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3")
+        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3", 'testTrainer')
       );
 
       trainer.setAthletes(athletes);
@@ -70,10 +70,10 @@ describe("Creating Trainer", () => {
     let athletes: Athlete[] = [];
     beforeAll(() => {
       athletes.push(
-        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaIs2")
+        new Athlete("testId1", "Konstantinos", "Tsirakos", 24, "oktaIs2", 'testTrainer')
       );
       athletes.push(
-        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3")
+        new Athlete("testId2", "Giorgos", "Tsirakos", 24, "oktaId3", 'testTrainer')
       );
 
       trainer.addAthlete(athletes[0]);

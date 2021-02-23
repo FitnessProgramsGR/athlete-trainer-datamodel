@@ -1,5 +1,6 @@
 import { ExerciseInstanceParser, ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
-import { Serializable } from "./helpers";
+import { DayNames, DayNamesType, Serializable } from "./helpers";
+import { Trainer, TrainerId } from "./trainer";
 
 export interface WeeklyProgrammJSON {
   monday: ProgramJSON;
@@ -10,7 +11,9 @@ export interface WeeklyProgrammJSON {
   saturday: ProgramJSON;
   sunday: ProgramJSON;
 }
+
 export class WeeklyProgramm {
+
   constructor(
     public monday: Program,
     public tuesday: Program,
@@ -19,7 +22,37 @@ export class WeeklyProgramm {
     public friday: Program,
     public saturday: Program,
     public sunday: Program
-  ) { }
+  ) {
+  }
+
+  getDay(day: DayNamesType): Program {
+    switch (day) {
+      case 'monday': {
+        return this.monday
+      }
+      case 'tuesday': {
+        return this.tuesday
+      }
+      case 'wednesday': {
+        return this.wednesday
+      }
+      case 'thursday': {
+        return this.thursday
+      }
+      case 'friday': {
+        return this.friday
+      }
+      case 'saturday': {
+        return this.saturday
+      }
+      case 'sunday': {
+        return this.sunday
+      }
+      default: {
+        throw (`Not a know day name ${day}`)
+      }
+    }
+  }
 
   toJSON(): WeeklyProgrammJSON {
     return Object.assign({}, this, {
@@ -31,6 +64,26 @@ export class WeeklyProgramm {
       saturday: this.saturday.toJSON(),
       sunday: this.sunday.toJSON(),
     });
+  }
+
+  fromJSON(json: WeeklyProgrammJSON): WeeklyProgramm {
+    const monday = Program.prototype.fromJSON(json.monday)
+    const tuesday = Program.prototype.fromJSON(json.tuesday)
+    const wednesday = Program.prototype.fromJSON(json.wednesday)
+    const thursday = Program.prototype.fromJSON(json.thursday)
+    const friday = Program.prototype.fromJSON(json.friday)
+    const saturday = Program.prototype.fromJSON(json.saturday)
+    const sunday = Program.prototype.fromJSON(json.sunday)
+
+    return new WeeklyProgramm(
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      saturday,
+      sunday
+    )
   }
 }
 
@@ -175,17 +228,24 @@ export class ProgramSection {
   }
 }
 
+
+export type ProgramTypes = 'restday' | 'emptyday' | 'program'
 export interface ProgramJSON {
   id: string;
   trainer: string;
   sections: ProgramSectionJSON[];
+  type: ProgramTypes,
+  comments?: string
 }
+
 
 export class Program extends Serializable {
   constructor(
-    public id: string,
-    public trainer: string,
-    public sections: ProgramSection[]
+    id: string,
+    public trainer: TrainerId,
+    public sections: ProgramSection[],
+    public type: ProgramTypes,
+    public comments?: string
   ) {
     super(id)
   }
@@ -204,6 +264,26 @@ export class Program extends Serializable {
     return new Program(
       json.id,
       json.trainer,
-      sections)
+      sections,
+      json.type)
+  }
+}
+
+export class BasicProgram extends Program {
+  constructor(id: string, trainer: TrainerId, sections: ProgramSection[], comments?: string) {
+    super(id, trainer, sections, 'program', comments)
+  }
+}
+
+export class Restday extends Program {
+  constructor(id: string, trainer: TrainerId, comments?: string) {
+    super(id, trainer, [], 'restday', comments)
+  }
+}
+
+
+export class EmptyDay extends Program {
+  constructor(id: string, trainer: TrainerId) {
+    super(id, trainer, [], 'emptyday')
   }
 }
