@@ -29,7 +29,6 @@ export {
   AnyExerciseCategory,
   ProgramSection,
   ProgramSectionJSON,
-  Program,
   ProgramJSON,
 } from "./src/programm";
 

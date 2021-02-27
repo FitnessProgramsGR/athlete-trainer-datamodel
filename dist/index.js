@@ -3,7 +3,7 @@
  * Exports for using the Datamodel
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VideoMedia = exports.ImageMedia = exports.Trainer = exports.Program = exports.ProgramSection = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = exports.Muscle = exports.ExerciseEntry = exports.MultiSetExercise = exports.SingleSetExercise = exports.Athlete = exports.Serializable = void 0;
+exports.VideoMedia = exports.ImageMedia = exports.Trainer = exports.ProgramSection = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = exports.Muscle = exports.ExerciseEntry = exports.MultiSetExercise = exports.SingleSetExercise = exports.Athlete = exports.Serializable = void 0;
 var helpers_1 = require("./src/helpers");
 Object.defineProperty(exports, "Serializable", { enumerable: true, get: function () { return helpers_1.Serializable; } });
 var athlete_1 = require("./src/athlete");
@@ -20,7 +20,6 @@ Object.defineProperty(exports, "Round", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "Superset", { enumerable: true, get: function () { return programm_1.Superset; } });
 Object.defineProperty(exports, "Serial", { enumerable: true, get: function () { return programm_1.Serial; } });
 Object.defineProperty(exports, "ProgramSection", { enumerable: true, get: function () { return programm_1.ProgramSection; } });
-Object.defineProperty(exports, "Program", { enumerable: true, get: function () { return programm_1.Program; } });
 var trainer_1 = require("./src/trainer");
 Object.defineProperty(exports, "Trainer", { enumerable: true, get: function () { return trainer_1.Trainer; } });
 var media_1 = require("./src/media");

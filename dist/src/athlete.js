@@ -23,6 +23,9 @@ var Athlete = /** @class */ (function (_super) {
         var _this = _super.call(this, id, name, surname, age, oktaId, "athlete") || this;
         _this.trainer = trainer;
         _this.program = program;
+        if (!program) {
+            _this.setProgram(new programm_1.WeeklyProgramm(new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer)));
+        }
         return _this;
     }
     Athlete.prototype.setTrainer = function (trainer) {

@@ -26,6 +26,19 @@ export class Athlete extends User {
     public program?: WeeklyProgramm
   ) {
     super(id, name, surname, age, oktaId, "athlete");
+    if (!program) {
+      this.setProgram(
+        new WeeklyProgramm(
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+          new EmptyDay('', this.trainer),
+        )
+      )
+    }
   }
 
   setTrainer(trainer: string) {

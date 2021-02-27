@@ -1,10 +1,10 @@
 import { MultiSetExercise, SingleSetExercise } from "../src/exercise";
 import {
-  Program,
   ProgramSection,
   Round,
   Serial,
   Superset,
+  Program
 } from "../src/programm";
 
 describe("Create Serial Program", () => {
@@ -19,7 +19,9 @@ describe("Create Serial Program", () => {
           new MultiSetExercise("exec4", [10, 8, 6, 4]),
         ]),
       ]),
-    ]);
+    ],
+      'program'
+    )
   });
 
   it("Serialize Data", () => {
@@ -55,7 +57,9 @@ describe("Create Program with warm up and core", () => {
           2
         ),
       ]),
-    ]);
+    ],
+      'program'
+    );
   });
 
   it("Serialize Data", () => {
