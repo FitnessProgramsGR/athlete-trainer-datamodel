@@ -15,6 +15,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Athlete = void 0;
 var user_1 = require("./user");
+var programm_1 = require("./programm");
+var helpers_1 = require("./helpers");
 var Athlete = /** @class */ (function (_super) {
     __extends(Athlete, _super);
     function Athlete(id, name, surname, age, oktaId, trainer, program) {
@@ -32,17 +34,46 @@ var Athlete = /** @class */ (function (_super) {
     Athlete.prototype.setProgram = function (program) {
         this.program = program;
     };
+    Athlete.prototype.updateProgram = function (day, program) {
+        var _a;
+        if (this.program) {
+            var updatedProgram = (_a = {
+                    monday: this.program.monday.toJSON(),
+                    tuesday: this.program.tuesday.toJSON(),
+                    wednesday: this.program.wednesday.toJSON(),
+                    thursday: this.program.thursday.toJSON(),
+                    friday: this.program.friday.toJSON(),
+                    saturday: this.program.saturday.toJSON(),
+                    sunday: this.program.sunday.toJSON()
+                },
+                _a[day] = program.toJSON(),
+                _a);
+            this.program = programm_1.WeeklyProgramm.prototype.fromJSON(updatedProgram);
+        }
+        else {
+            throw ('Program is undefined, please create a program first');
+        }
+    };
+    Athlete.prototype.deleteProgramDay = function (day) {
+        this.updateProgram(day, new programm_1.EmptyDay('randomGeneratedIdAlert', this.trainer));
+    };
+    Athlete.prototype.deleteWeeklyProgram = function () {
+        for (var _i = 0, _a = Object.values(helpers_1.DayNames); _i < _a.length; _i++) {
+            var day = _a[_i];
+            this.deleteProgramDay(day);
+        }
+    };
     Athlete.prototype.getProgram = function () {
         return this.program;
     };
     Athlete.prototype.toJSON = function () {
         return Object.assign({}, this, {
-            trainer: this.trainer ? this.trainer : '',
-            program: this.program ? this.program : '',
+            trainer: this.trainer,
+            program: this.program ? this.program.toJSON() : undefined,
         });
     };
     Athlete.prototype.fromJSON = function (json) {
-        return new Athlete(json.id, json.name, json.surname, json.age, json.oktaId, json.trainer, json.program);
+        return new Athlete(json.id, json.name, json.surname, json.age, json.oktaId, json.trainer, json.program ? programm_1.WeeklyProgramm.prototype.fromJSON(json.program) : undefined);
     };
     return Athlete;
 }(user_1.User));

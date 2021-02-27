@@ -1,5 +1,6 @@
 import { ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
-import { Serializable } from "./helpers";
+import { DayNamesType, Serializable } from "./helpers";
+import { TrainerId } from "./trainer";
 export interface WeeklyProgrammJSON {
     monday: ProgramJSON;
     tuesday: ProgramJSON;
@@ -18,7 +19,9 @@ export declare class WeeklyProgramm {
     saturday: Program;
     sunday: Program;
     constructor(monday: Program, tuesday: Program, wednesday: Program, thursday: Program, friday: Program, saturday: Program, sunday: Program);
+    getDay(day: DayNamesType): Program;
     toJSON(): WeeklyProgrammJSON;
+    fromJSON(json: WeeklyProgrammJSON): WeeklyProgramm;
 }
 export declare type Categories = "round" | "superset" | "serial";
 export interface ExerciseCategoryJSON {
@@ -82,16 +85,29 @@ export declare class ProgramSection {
     toJSON(): ProgramSectionJSON;
     fromJSON(json: ProgramSectionJSON): ProgramSection;
 }
+export declare type ProgramTypes = 'restday' | 'emptyday' | 'program';
 export interface ProgramJSON {
     id: string;
     trainer: string;
     sections: ProgramSectionJSON[];
+    type: ProgramTypes;
+    comments?: string;
 }
 export declare class Program extends Serializable {
-    id: string;
-    trainer: string;
+    trainer: TrainerId;
     sections: ProgramSection[];
-    constructor(id: string, trainer: string, sections: ProgramSection[]);
+    type: ProgramTypes;
+    comments?: string | undefined;
+    constructor(id: string, trainer: TrainerId, sections: ProgramSection[], type: ProgramTypes, comments?: string | undefined);
     toJSON(): ProgramJSON;
     fromJSON(json: ProgramJSON): Program;
+}
+export declare class BasicProgram extends Program {
+    constructor(id: string, trainer: TrainerId, sections: ProgramSection[], comments?: string);
+}
+export declare class Restday extends Program {
+    constructor(id: string, trainer: TrainerId, comments?: string);
+}
+export declare class EmptyDay extends Program {
+    constructor(id: string, trainer: TrainerId);
 }

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
+exports.EmptyDay = exports.Restday = exports.BasicProgram = exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
 var exercise_1 = require("./exercise");
 var helpers_1 = require("./helpers");
 var WeeklyProgramm = /** @class */ (function () {
@@ -26,6 +26,34 @@ var WeeklyProgramm = /** @class */ (function () {
         this.saturday = saturday;
         this.sunday = sunday;
     }
+    WeeklyProgramm.prototype.getDay = function (day) {
+        switch (day) {
+            case 'monday': {
+                return this.monday;
+            }
+            case 'tuesday': {
+                return this.tuesday;
+            }
+            case 'wednesday': {
+                return this.wednesday;
+            }
+            case 'thursday': {
+                return this.thursday;
+            }
+            case 'friday': {
+                return this.friday;
+            }
+            case 'saturday': {
+                return this.saturday;
+            }
+            case 'sunday': {
+                return this.sunday;
+            }
+            default: {
+                throw ("Not a know day name " + day);
+            }
+        }
+    };
     WeeklyProgramm.prototype.toJSON = function () {
         return Object.assign({}, this, {
             monday: this.monday.toJSON(),
@@ -36,6 +64,16 @@ var WeeklyProgramm = /** @class */ (function () {
             saturday: this.saturday.toJSON(),
             sunday: this.sunday.toJSON(),
         });
+    };
+    WeeklyProgramm.prototype.fromJSON = function (json) {
+        var monday = Program.prototype.fromJSON(json.monday);
+        var tuesday = Program.prototype.fromJSON(json.tuesday);
+        var wednesday = Program.prototype.fromJSON(json.wednesday);
+        var thursday = Program.prototype.fromJSON(json.thursday);
+        var friday = Program.prototype.fromJSON(json.friday);
+        var saturday = Program.prototype.fromJSON(json.saturday);
+        var sunday = Program.prototype.fromJSON(json.sunday);
+        return new WeeklyProgramm(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
     };
     return WeeklyProgramm;
 }());
@@ -148,11 +186,12 @@ var ProgramSection = /** @class */ (function () {
 exports.ProgramSection = ProgramSection;
 var Program = /** @class */ (function (_super) {
     __extends(Program, _super);
-    function Program(id, trainer, sections) {
+    function Program(id, trainer, sections, type, comments) {
         var _this = _super.call(this, id) || this;
-        _this.id = id;
         _this.trainer = trainer;
         _this.sections = sections;
+        _this.type = type;
+        _this.comments = comments;
         return _this;
     }
     Program.prototype.toJSON = function () {
@@ -162,9 +201,33 @@ var Program = /** @class */ (function (_super) {
     };
     Program.prototype.fromJSON = function (json) {
         var sections = json.sections.map(function (elem) { return ProgramSection.prototype.fromJSON(elem); });
-        return new Program(json.id, json.trainer, sections);
+        return new Program(json.id, json.trainer, sections, json.type);
     };
     return Program;
 }(helpers_1.Serializable));
 exports.Program = Program;
+var BasicProgram = /** @class */ (function (_super) {
+    __extends(BasicProgram, _super);
+    function BasicProgram(id, trainer, sections, comments) {
+        return _super.call(this, id, trainer, sections, 'program', comments) || this;
+    }
+    return BasicProgram;
+}(Program));
+exports.BasicProgram = BasicProgram;
+var Restday = /** @class */ (function (_super) {
+    __extends(Restday, _super);
+    function Restday(id, trainer, comments) {
+        return _super.call(this, id, trainer, [], 'restday', comments) || this;
+    }
+    return Restday;
+}(Program));
+exports.Restday = Restday;
+var EmptyDay = /** @class */ (function (_super) {
+    __extends(EmptyDay, _super);
+    function EmptyDay(id, trainer) {
+        return _super.call(this, id, trainer, [], 'emptyday') || this;
+    }
+    return EmptyDay;
+}(Program));
+exports.EmptyDay = EmptyDay;
 //# sourceMappingURL=programm.js.map

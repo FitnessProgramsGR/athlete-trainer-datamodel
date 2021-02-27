@@ -1,4 +1,5 @@
 import { User } from "./user";
+import { Program, WeeklyProgramm, WeeklyProgrammJSON } from "./programm";
 export declare type AthleteId = string;
 export interface AthleteJSON {
     id: string;
@@ -9,16 +10,19 @@ export interface AthleteJSON {
     oktaId: string;
     type: string;
     trainer: string;
-    program: string;
+    program: WeeklyProgrammJSON | undefined;
 }
 export declare class Athlete extends User {
-    trainer?: string | undefined;
-    program?: string | undefined;
-    constructor(id: string, name: string, surname: string, age: number, oktaId: string, trainer?: string | undefined, program?: string | undefined);
+    trainer: string;
+    program?: WeeklyProgramm | undefined;
+    constructor(id: string, name: string, surname: string, age: number, oktaId: string, trainer: string, program?: WeeklyProgramm | undefined);
     setTrainer(trainer: string): void;
-    getTrainer(): string | undefined;
-    setProgram(program: string): void;
-    getProgram(): string | undefined;
+    getTrainer(): string;
+    setProgram(program: WeeklyProgramm): void;
+    updateProgram(day: string, program: Program): void;
+    deleteProgramDay(day: string): void;
+    deleteWeeklyProgram(): void;
+    getProgram(): WeeklyProgramm | undefined;
     toJSON(): AthleteJSON;
     fromJSON(json: AthleteJSON): Athlete;
 }
