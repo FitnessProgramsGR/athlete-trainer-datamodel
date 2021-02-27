@@ -35,13 +35,13 @@ describe("Creating athlete", () => {
       expect(athlete.fullname).toBe("Konstantinos Tsirakos"));
     it('Trainer id is correct', () => expect(athlete.trainer).toBe('testTrainerId'))
     it('Program is full of empty programs', () => {
-      expect(athlete.program.monday.type).toBe('emptyday')
-      expect(athlete.program.tuesday.type).toBe('emptyday')
-      expect(athlete.program.wednesday.type).toBe('emptyday')
-      expect(athlete.program.thursday.type).toBe('emptyday')
-      expect(athlete.program.friday.type).toBe('emptyday')
-      expect(athlete.program.saturday.type).toBe('emptyday')
-      expect(athlete.program.sunday.type).toBe('emptyday')
+      expect(athlete.program?.monday.type).toBe('emptyday')
+      expect(athlete.program?.tuesday.type).toBe('emptyday')
+      expect(athlete.program?.wednesday.type).toBe('emptyday')
+      expect(athlete.program?.thursday.type).toBe('emptyday')
+      expect(athlete.program?.friday.type).toBe('emptyday')
+      expect(athlete.program?.saturday.type).toBe('emptyday')
+      expect(athlete.program?.sunday.type).toBe('emptyday')
     })
   });
 
