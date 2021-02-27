@@ -8,7 +8,6 @@ var Serializable = /** @class */ (function () {
     return Serializable;
 }());
 exports.Serializable = Serializable;
-"";
 exports.DayNames = [
     'monday',
     'tuesday',
