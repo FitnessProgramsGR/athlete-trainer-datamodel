@@ -8,10 +8,17 @@
     "watch": "babel --watch src --out-dir lib --extensions .ts",
     "build": "babel --extensions .ts ./datamodel -d ./dist",
     "test": "jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "addDistToGit": "git add .",
+    "precommit-msg1": "echo 'Pre-commit building...' && exit 0",
+    "precommit-msg2": "echo 'Pre-commit adding to git...' && exit 0"
+
   },
   "pre-commit": [
-    "tsc"
+    "precommit-msg1",
+    "tsc",
+    "precommit-msg2",
+    "addDistToGit"
   ],
   "repository": {
     "type": "git",
