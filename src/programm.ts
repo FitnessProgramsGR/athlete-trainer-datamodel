@@ -300,15 +300,17 @@ export class BasicProgram extends Program {
   }
 }
 
+export const REST_DAY_ID = 'restdayId'
 export class Restday extends Program {
   constructor(trainer: TrainerId, comments?: string) {
-    super('restdayId', trainer, [], 'restday', comments)
+    super(REST_DAY_ID, trainer, [], 'restday', comments)
   }
 }
 
 
+export const EMPTY_DAY_ID = 'emptydayId'
 export class EmptyDay extends Program {
   constructor(trainer: TrainerId) {
-    super('emptyDayId', trainer, [], 'emptyday')
+    super(EMPTY_DAY_ID, trainer, [], 'emptyday')
   }
 }

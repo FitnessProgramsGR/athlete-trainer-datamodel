@@ -30,6 +30,8 @@ export {
   ProgramSection,
   ProgramSectionJSON,
   ProgramJSON,
+  EMPTY_DAY_ID,
+  REST_DAY_ID
 } from "./src/programm";
 
 export { Trainer, TrainerId, TrainerJSON } from "./src/trainer";
