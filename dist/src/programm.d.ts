@@ -2,25 +2,25 @@ import { ExerciseJSON, MultiSetExercise, SingleSetExercise } from "./exercise";
 import { DayNamesType, Serializable } from "./helpers";
 import { TrainerId } from "./trainer";
 export interface WeeklyProgrammJSON {
-    monday: ProgramJSON;
-    tuesday: ProgramJSON;
-    wednesday: ProgramJSON;
-    thursday: ProgramJSON;
-    friday: ProgramJSON;
-    saturday: ProgramJSON;
-    sunday: ProgramJSON;
+    monday: ProgramId;
+    tuesday: ProgramId;
+    wednesday: ProgramId;
+    thursday: ProgramId;
+    friday: ProgramId;
+    saturday: ProgramId;
+    sunday: ProgramId;
 }
 export declare class WeeklyProgramm {
-    monday: Program;
-    tuesday: Program;
-    wednesday: Program;
-    thursday: Program;
-    friday: Program;
-    saturday: Program;
-    sunday: Program;
-    constructor(monday: Program, tuesday: Program, wednesday: Program, thursday: Program, friday: Program, saturday: Program, sunday: Program);
-    getDay(day: DayNamesType): Program;
-    setDay(day: string, program: Program): void;
+    monday: ProgramId;
+    tuesday: ProgramId;
+    wednesday: ProgramId;
+    thursday: ProgramId;
+    friday: ProgramId;
+    saturday: ProgramId;
+    sunday: ProgramId;
+    constructor(monday: ProgramId, tuesday: ProgramId, wednesday: ProgramId, thursday: ProgramId, friday: ProgramId, saturday: ProgramId, sunday: ProgramId);
+    getDay(day: DayNamesType): ProgramId;
+    setDay(day: string, program: ProgramId): void;
     toJSON(): WeeklyProgrammJSON;
     fromJSON(json: WeeklyProgrammJSON): WeeklyProgramm;
 }
@@ -94,12 +94,13 @@ export interface ProgramJSON {
     type: ProgramTypes;
     comments?: string;
 }
+export declare type ProgramId = string;
 export declare class Program extends Serializable {
     trainer: TrainerId;
     sections: ProgramSection[];
     type: ProgramTypes;
     comments?: string | undefined;
-    constructor(id: string, trainer: TrainerId, sections: ProgramSection[], type: ProgramTypes, comments?: string | undefined);
+    constructor(id: ProgramId, trainer: TrainerId, sections: ProgramSection[], type: ProgramTypes, comments?: string | undefined);
     toJSON(): ProgramJSON;
     fromJSON(json: ProgramJSON): Program;
 }
@@ -107,8 +108,8 @@ export declare class BasicProgram extends Program {
     constructor(id: string, trainer: TrainerId, sections: ProgramSection[], comments?: string);
 }
 export declare class Restday extends Program {
-    constructor(id: string, trainer: TrainerId, comments?: string);
+    constructor(trainer: TrainerId, comments?: string);
 }
 export declare class EmptyDay extends Program {
-    constructor(id: string, trainer: TrainerId);
+    constructor(trainer: TrainerId);
 }

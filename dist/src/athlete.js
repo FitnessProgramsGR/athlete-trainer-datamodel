@@ -24,7 +24,7 @@ var Athlete = /** @class */ (function (_super) {
         _this.trainer = trainer;
         _this.program = program;
         if (!program) {
-            _this.setProgram(new programm_1.WeeklyProgramm(new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer), new programm_1.EmptyDay('', _this.trainer)));
+            _this.setProgram(new programm_1.WeeklyProgramm(new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id, new programm_1.EmptyDay(_this.trainer).id));
         }
         return _this;
     }
@@ -46,7 +46,7 @@ var Athlete = /** @class */ (function (_super) {
         }
     };
     Athlete.prototype.deleteProgramDay = function (day) {
-        this.updateProgram(day, new programm_1.EmptyDay('randomGeneratedIdAlert', this.trainer));
+        this.updateProgram(day, new programm_1.EmptyDay(this.trainer).id);
     };
     Athlete.prototype.deleteWeeklyProgram = function () {
         for (var _i = 0, _a = Object.values(helpers_1.DayNames); _i < _a.length; _i++) {

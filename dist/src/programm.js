@@ -16,6 +16,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmptyDay = exports.Restday = exports.BasicProgram = exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
 var exercise_1 = require("./exercise");
 var helpers_1 = require("./helpers");
+// export interface ProgramEntry {
+//   id: ProgramId,
+//   type: ProgramTypes
+// }
 var WeeklyProgramm = /** @class */ (function () {
     function WeeklyProgramm(monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
         this.monday = monday;
@@ -82,24 +86,16 @@ var WeeklyProgramm = /** @class */ (function () {
         }
     };
     WeeklyProgramm.prototype.toJSON = function () {
-        return Object.assign({}, this, {
-            monday: this.monday.toJSON(),
-            tuesday: this.tuesday.toJSON(),
-            wednesday: this.wednesday.toJSON(),
-            thursday: this.thursday.toJSON(),
-            friday: this.friday.toJSON(),
-            saturday: this.saturday.toJSON(),
-            sunday: this.sunday.toJSON(),
-        });
+        return Object.assign({}, this);
     };
     WeeklyProgramm.prototype.fromJSON = function (json) {
-        var monday = Program.prototype.fromJSON(json.monday);
-        var tuesday = Program.prototype.fromJSON(json.tuesday);
-        var wednesday = Program.prototype.fromJSON(json.wednesday);
-        var thursday = Program.prototype.fromJSON(json.thursday);
-        var friday = Program.prototype.fromJSON(json.friday);
-        var saturday = Program.prototype.fromJSON(json.saturday);
-        var sunday = Program.prototype.fromJSON(json.sunday);
+        var monday = json.monday;
+        var tuesday = json.tuesday;
+        var wednesday = json.wednesday;
+        var thursday = json.thursday;
+        var friday = json.friday;
+        var saturday = json.saturday;
+        var sunday = json.sunday;
         return new WeeklyProgramm(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
     };
     return WeeklyProgramm;
@@ -243,16 +239,16 @@ var BasicProgram = /** @class */ (function (_super) {
 exports.BasicProgram = BasicProgram;
 var Restday = /** @class */ (function (_super) {
     __extends(Restday, _super);
-    function Restday(id, trainer, comments) {
-        return _super.call(this, id, trainer, [], 'restday', comments) || this;
+    function Restday(trainer, comments) {
+        return _super.call(this, 'restdayId', trainer, [], 'restday', comments) || this;
     }
     return Restday;
 }(Program));
 exports.Restday = Restday;
 var EmptyDay = /** @class */ (function (_super) {
     __extends(EmptyDay, _super);
-    function EmptyDay(id, trainer) {
-        return _super.call(this, id, trainer, [], 'emptyday') || this;
+    function EmptyDay(trainer) {
+        return _super.call(this, 'emptyDayId', trainer, [], 'emptyday') || this;
     }
     return EmptyDay;
 }(Program));

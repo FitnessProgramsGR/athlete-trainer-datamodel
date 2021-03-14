@@ -3,29 +3,34 @@ import { DayNames, DayNamesType, Serializable } from "./helpers";
 import { Trainer, TrainerId } from "./trainer";
 
 export interface WeeklyProgrammJSON {
-  monday: ProgramJSON;
-  tuesday: ProgramJSON;
-  wednesday: ProgramJSON;
-  thursday: ProgramJSON;
-  friday: ProgramJSON;
-  saturday: ProgramJSON;
-  sunday: ProgramJSON;
+  monday: ProgramId;
+  tuesday: ProgramId;
+  wednesday: ProgramId;
+  thursday: ProgramId;
+  friday: ProgramId;
+  saturday: ProgramId;
+  sunday: ProgramId;
 }
+
+// export interface ProgramEntry {
+//   id: ProgramId,
+//   type: ProgramTypes
+// }
 
 export class WeeklyProgramm {
 
   constructor(
-    public monday: Program,
-    public tuesday: Program,
-    public wednesday: Program,
-    public thursday: Program,
-    public friday: Program,
-    public saturday: Program,
-    public sunday: Program
+    public monday: ProgramId,
+    public tuesday: ProgramId,
+    public wednesday: ProgramId,
+    public thursday: ProgramId,
+    public friday: ProgramId,
+    public saturday: ProgramId,
+    public sunday: ProgramId
   ) {
   }
 
-  getDay(day: DayNamesType): Program {
+  getDay(day: DayNamesType): ProgramId {
     switch (day) {
       case 'monday': {
         return this.monday
@@ -54,7 +59,7 @@ export class WeeklyProgramm {
     }
   }
 
-  setDay(day: string, program: Program) {
+  setDay(day: string, program: ProgramId) {
     console.log(day)
     if (day === "monday") {
       this.monday = program
@@ -83,25 +88,17 @@ export class WeeklyProgramm {
 
 
   toJSON(): WeeklyProgrammJSON {
-    return Object.assign({}, this, {
-      monday: this.monday.toJSON(),
-      tuesday: this.tuesday.toJSON(),
-      wednesday: this.wednesday.toJSON(),
-      thursday: this.thursday.toJSON(),
-      friday: this.friday.toJSON(),
-      saturday: this.saturday.toJSON(),
-      sunday: this.sunday.toJSON(),
-    });
+    return Object.assign({}, this);
   }
 
   fromJSON(json: WeeklyProgrammJSON): WeeklyProgramm {
-    const monday = Program.prototype.fromJSON(json.monday)
-    const tuesday = Program.prototype.fromJSON(json.tuesday)
-    const wednesday = Program.prototype.fromJSON(json.wednesday)
-    const thursday = Program.prototype.fromJSON(json.thursday)
-    const friday = Program.prototype.fromJSON(json.friday)
-    const saturday = Program.prototype.fromJSON(json.saturday)
-    const sunday = Program.prototype.fromJSON(json.sunday)
+    const monday = json.monday
+    const tuesday = json.tuesday
+    const wednesday = json.wednesday
+    const thursday = json.thursday
+    const friday = json.friday
+    const saturday = json.saturday
+    const sunday = json.sunday
 
     return new WeeklyProgramm(
       monday,
@@ -266,10 +263,10 @@ export interface ProgramJSON {
   comments?: string
 }
 
-
+export type ProgramId = string
 export class Program extends Serializable {
   constructor(
-    id: string,
+    id: ProgramId,
     public trainer: TrainerId,
     public sections: ProgramSection[],
     public type: ProgramTypes,
@@ -304,14 +301,14 @@ export class BasicProgram extends Program {
 }
 
 export class Restday extends Program {
-  constructor(id: string, trainer: TrainerId, comments?: string) {
-    super(id, trainer, [], 'restday', comments)
+  constructor(trainer: TrainerId, comments?: string) {
+    super('restdayId', trainer, [], 'restday', comments)
   }
 }
 
 
 export class EmptyDay extends Program {
-  constructor(id: string, trainer: TrainerId) {
-    super(id, trainer, [], 'emptyday')
+  constructor(trainer: TrainerId) {
+    super('emptyDayId', trainer, [], 'emptyday')
   }
 }

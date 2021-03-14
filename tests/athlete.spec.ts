@@ -35,13 +35,13 @@ describe("Creating athlete", () => {
       expect(athlete.fullname).toBe("Konstantinos Tsirakos"));
     it('Trainer id is correct', () => expect(athlete.trainer).toBe('testTrainerId'))
     it('Program is full of empty programs', () => {
-      expect(athlete.program?.monday.type).toBe('emptyday')
-      expect(athlete.program?.tuesday.type).toBe('emptyday')
-      expect(athlete.program?.wednesday.type).toBe('emptyday')
-      expect(athlete.program?.thursday.type).toBe('emptyday')
-      expect(athlete.program?.friday.type).toBe('emptyday')
-      expect(athlete.program?.saturday.type).toBe('emptyday')
-      expect(athlete.program?.sunday.type).toBe('emptyday')
+      expect(athlete.program?.monday).toBe('emptyDayId')
+      expect(athlete.program?.tuesday).toBe('emptyDayId')
+      expect(athlete.program?.wednesday).toBe('emptyDayId')
+      expect(athlete.program?.thursday).toBe('emptyDayId')
+      expect(athlete.program?.friday).toBe('emptyDayId')
+      expect(athlete.program?.saturday).toBe('emptyDayId')
+      expect(athlete.program?.sunday).toBe('emptyDayId')
     })
   });
 
@@ -49,13 +49,13 @@ describe("Creating athlete", () => {
   describe("Setters", () => {
     beforeAll(() => {
       athlete.setProgram(new WeeklyProgramm(
-        new Restday('restDayRandomId1', 'testTrainerId'),
-        new Restday('restDayRandomId2', 'testTrainerId'),
-        new Restday('restDayRandomId3', 'testTrainerId'),
-        new Restday('restDayRandomId4', 'testTrainerId'),
-        new Restday('restDayRandomId5', 'testTrainerId'),
-        new Restday('restDayRandomId6', 'testTrainerId'),
-        new Restday('restDayRandomId7', 'testTrainerId'),
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
+        new Restday('testTrainerId').id,
       ));
       athlete.setTrainer("testTrainerId2");
     });
@@ -66,7 +66,7 @@ describe("Creating athlete", () => {
 
     it("Program is set correctly", () => {
       expect(athlete.program).toBeDefined()
-      expect(athlete.program?.monday.id).toBe('restDayRandomId1')
+      expect(athlete.program?.monday).toBe('restdayId')
     });
   });
 
@@ -77,7 +77,7 @@ describe("Creating athlete", () => {
     });
 
     it("Get Program is working correctly", () => {
-      expect(athlete.getProgram()?.monday.id).toBe("restDayRandomId1");
+      expect(athlete.getProgram()?.monday).toBe("restdayId");
     });
   });
 
@@ -96,12 +96,11 @@ describe("Creating athlete", () => {
 
     beforeAll(() => {
       const day = "wednesday"
-      athlete.updateProgram(day, newProg)
+      athlete.updateProgram(day, newProg.id)
     })
 
     it('Program is updated correctly', () => {
-      expect(athlete.getProgram()?.wednesday.id).toBe('updatedId')
-      expect(athlete.getProgram()?.wednesday.sections[0].name).toBe('Warm up')
+      expect(athlete.getProgram()?.wednesday).toBe('updatedId')
     })
   })
 
@@ -112,8 +111,7 @@ describe("Creating athlete", () => {
     })
 
     it('Program is updated correctly', () => {
-      expect(athlete.getProgram()?.wednesday.id).toBe('randomGeneratedIdAlert')
-      expect(athlete.getProgram()?.wednesday.type).toBe('emptyday')
+      expect(athlete.getProgram()?.wednesday).toBe('emptyDayId')
     })
   })
 
@@ -136,12 +134,12 @@ describe("Creating athlete", () => {
 
       if (prog) {
 
-        const array1 = days.map((elem: DayNamesType) => prog.getDay(elem).type)
-          .filter((elem: string) => elem !== 'emptyday')
+        const array1 = days.map((elem: DayNamesType) => prog.getDay(elem))
+          .filter((elem: string) => elem !== 'emptyDayId')
         expect(array1.length).toBe(0)
 
       } else {
-        throw ('Program shouldn\'t be undefined')
+        throw ("Program shouldn't be undefined")
       }
     })
   })

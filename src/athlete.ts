@@ -1,5 +1,5 @@
 import { User } from "./user";
-import { EmptyDay, Program, WeeklyProgramm, WeeklyProgrammJSON } from "./programm"
+import { EmptyDay, Program, ProgramId, WeeklyProgramm, WeeklyProgrammJSON } from "./programm"
 import { DayNames, DayNamesType } from "./helpers";
 export type AthleteId = string;
 
@@ -29,13 +29,13 @@ export class Athlete extends User {
     if (!program) {
       this.setProgram(
         new WeeklyProgramm(
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
-          new EmptyDay('', this.trainer),
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
+          new EmptyDay(this.trainer).id,
         )
       )
     }
@@ -53,7 +53,7 @@ export class Athlete extends User {
     this.program = program;
   }
 
-  updateProgram(day: string, program: Program): void {
+  updateProgram(day: string, program: ProgramId): void {
     if (this.program) {
       this.program.setDay(day, program)
     } else {
@@ -62,7 +62,7 @@ export class Athlete extends User {
   }
 
   deleteProgramDay(day: string): void {
-    this.updateProgram(day, new EmptyDay('randomGeneratedIdAlert', this.trainer))
+    this.updateProgram(day, new EmptyDay(this.trainer).id)
   }
 
   deleteWeeklyProgram(): void {
