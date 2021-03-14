@@ -1,6 +1,6 @@
 import { User } from "./user";
 import { EmptyDay, Program, WeeklyProgramm, WeeklyProgrammJSON } from "./programm"
-import { DayNames } from "./helpers";
+import { DayNames, DayNamesType } from "./helpers";
 export type AthleteId = string;
 
 export interface AthleteJSON {
@@ -55,17 +55,7 @@ export class Athlete extends User {
 
   updateProgram(day: string, program: Program): void {
     if (this.program) {
-      const updatedProgram: WeeklyProgrammJSON = {
-        monday: this.program.monday.toJSON(),
-        tuesday: this.program.tuesday.toJSON(),
-        wednesday: this.program.wednesday.toJSON(),
-        thursday: this.program.thursday.toJSON(),
-        friday: this.program.friday.toJSON(),
-        saturday: this.program.saturday.toJSON(),
-        sunday: this.program.sunday.toJSON(),
-        [day]: program.toJSON()
-      }
-      this.program = WeeklyProgramm.prototype.fromJSON(updatedProgram)
+      this.program.setDay(day, program)
     } else {
       throw ('Program is undefined, please create a program first')
     }

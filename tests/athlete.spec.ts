@@ -95,7 +95,8 @@ describe("Creating athlete", () => {
         )])
 
     beforeAll(() => {
-      athlete.updateProgram('wednesday', newProg)
+      const day = "wednesday"
+      athlete.updateProgram(day, newProg)
     })
 
     it('Program is updated correctly', () => {
@@ -106,7 +107,8 @@ describe("Creating athlete", () => {
 
   describe('Deletes user program day', () => {
     beforeAll(() => {
-      athlete.deleteProgramDay('wednesday')
+      const day: DayNamesType = "wednesday"
+      athlete.deleteProgramDay(day)
     })
 
     it('Program is updated correctly', () => {

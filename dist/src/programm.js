@@ -54,6 +54,33 @@ var WeeklyProgramm = /** @class */ (function () {
             }
         }
     };
+    WeeklyProgramm.prototype.setDay = function (day, program) {
+        console.log(day);
+        if (day === "monday") {
+            this.monday = program;
+        }
+        else if (day === "tuesday") {
+            this.tuesday = program;
+        }
+        else if (day === "wednesday") {
+            this.wednesday = program;
+        }
+        else if (day === "thursday") {
+            this.thursday = program;
+        }
+        else if (day === "friday") {
+            this.friday = program;
+        }
+        else if (day === "saturday") {
+            this.saturday = program;
+        }
+        else if (day === "sunday") {
+            this.sunday = program;
+        }
+        else {
+            throw ("Not a know day name " + day);
+        }
+    };
     WeeklyProgramm.prototype.toJSON = function () {
         return Object.assign({}, this, {
             monday: this.monday.toJSON(),

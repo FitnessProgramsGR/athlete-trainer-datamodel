@@ -20,6 +20,7 @@ export declare class WeeklyProgramm {
     sunday: Program;
     constructor(monday: Program, tuesday: Program, wednesday: Program, thursday: Program, friday: Program, saturday: Program, sunday: Program);
     getDay(day: DayNamesType): Program;
+    setDay(day: string, program: Program): void;
     toJSON(): WeeklyProgrammJSON;
     fromJSON(json: WeeklyProgrammJSON): WeeklyProgramm;
 }

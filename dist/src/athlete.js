@@ -38,20 +38,8 @@ var Athlete = /** @class */ (function (_super) {
         this.program = program;
     };
     Athlete.prototype.updateProgram = function (day, program) {
-        var _a;
         if (this.program) {
-            var updatedProgram = (_a = {
-                    monday: this.program.monday.toJSON(),
-                    tuesday: this.program.tuesday.toJSON(),
-                    wednesday: this.program.wednesday.toJSON(),
-                    thursday: this.program.thursday.toJSON(),
-                    friday: this.program.friday.toJSON(),
-                    saturday: this.program.saturday.toJSON(),
-                    sunday: this.program.sunday.toJSON()
-                },
-                _a[day] = program.toJSON(),
-                _a);
-            this.program = programm_1.WeeklyProgramm.prototype.fromJSON(updatedProgram);
+            this.program.setDay(day, program);
         }
         else {
             throw ('Program is undefined, please create a program first');
