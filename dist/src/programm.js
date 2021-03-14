@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmptyDay = exports.Restday = exports.BasicProgram = exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
+exports.EmptyDay = exports.EMPTY_DAY_ID = exports.Restday = exports.REST_DAY_ID = exports.BasicProgram = exports.Program = exports.ProgramSection = exports.ExerciseCategoryArrayParser = exports.Serial = exports.Superset = exports.Round = exports.ExerciseCategory = exports.WeeklyProgramm = void 0;
 var exercise_1 = require("./exercise");
 var helpers_1 = require("./helpers");
 // export interface ProgramEntry {
@@ -237,18 +237,20 @@ var BasicProgram = /** @class */ (function (_super) {
     return BasicProgram;
 }(Program));
 exports.BasicProgram = BasicProgram;
+exports.REST_DAY_ID = 'restdayId';
 var Restday = /** @class */ (function (_super) {
     __extends(Restday, _super);
     function Restday(trainer, comments) {
-        return _super.call(this, 'restdayId', trainer, [], 'restday', comments) || this;
+        return _super.call(this, exports.REST_DAY_ID, trainer, [], 'restday', comments) || this;
     }
     return Restday;
 }(Program));
 exports.Restday = Restday;
+exports.EMPTY_DAY_ID = 'emptydayId';
 var EmptyDay = /** @class */ (function (_super) {
     __extends(EmptyDay, _super);
     function EmptyDay(trainer) {
-        return _super.call(this, 'emptyDayId', trainer, [], 'emptyday') || this;
+        return _super.call(this, exports.EMPTY_DAY_ID, trainer, [], 'emptyday') || this;
     }
     return EmptyDay;
 }(Program));

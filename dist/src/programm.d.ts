@@ -107,9 +107,11 @@ export declare class Program extends Serializable {
 export declare class BasicProgram extends Program {
     constructor(id: string, trainer: TrainerId, sections: ProgramSection[], comments?: string);
 }
+export declare const REST_DAY_ID = "restdayId";
 export declare class Restday extends Program {
     constructor(trainer: TrainerId, comments?: string);
 }
+export declare const EMPTY_DAY_ID = "emptydayId";
 export declare class EmptyDay extends Program {
     constructor(trainer: TrainerId);
 }
