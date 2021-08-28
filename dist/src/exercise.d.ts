@@ -1,5 +1,6 @@
 import { Serializable } from "./helpers";
 import { AnyMediaEntry, MediaEntryJSON } from "./media";
+import { TrainerId } from "./trainer";
 export declare type ExerciseEntryId = string;
 export interface MuscleJSON {
     name: string;
@@ -16,6 +17,7 @@ export interface ExerciseEntryJSON {
     description: string;
     muscles: MuscleJSON[];
     media: MediaEntryJSON[];
+    trainer: TrainerId;
 }
 export declare class ExerciseEntry extends Serializable {
     id: ExerciseEntryId;
@@ -23,7 +25,8 @@ export declare class ExerciseEntry extends Serializable {
     description: string;
     muscles: Muscle[];
     media: AnyMediaEntry[];
-    constructor(id: ExerciseEntryId, name: string, description: string, muscles: Muscle[], media: AnyMediaEntry[]);
+    trainer: TrainerId;
+    constructor(id: ExerciseEntryId, name: string, description: string, muscles: Muscle[], media: AnyMediaEntry[], trainer: TrainerId);
     toJSON(): ExerciseEntryJSON;
 }
 export interface ExerciseJSON {

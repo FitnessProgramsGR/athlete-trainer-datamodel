@@ -31,19 +31,20 @@ var Muscle = /** @class */ (function (_super) {
 exports.Muscle = Muscle;
 var ExerciseEntry = /** @class */ (function (_super) {
     __extends(ExerciseEntry, _super);
-    function ExerciseEntry(id, name, description, muscles, media) {
+    function ExerciseEntry(id, name, description, muscles, media, trainer) {
         var _this = _super.call(this, id) || this;
         _this.id = id;
         _this.name = name;
         _this.description = description;
         _this.muscles = muscles;
         _this.media = media;
+        _this.trainer = trainer;
         return _this;
     }
     ExerciseEntry.prototype.toJSON = function () {
         return Object.assign({}, this, {
             muscles: this.muscles.map(function (elem) { return elem.toJSON(); }),
-            media: this.media.map(function (elem) { return elem.toJSON(); })
+            media: this.media.map(function (elem) { return elem.toJSON(); }),
         });
     };
     return ExerciseEntry;
@@ -100,14 +101,14 @@ var ExerciseInstanceParser = /** @class */ (function () {
     }
     ExerciseInstanceParser.prototype.fromJSON = function (json) {
         switch (json.type) {
-            case 'multiset': {
+            case "multiset": {
                 return MultiSetExercise.prototype.fromJSON(json);
             }
-            case 'singleset': {
+            case "singleset": {
                 return SingleSetExercise.prototype.fromJSON(json);
             }
             default: {
-                throw ("Not known type of set " + json.type);
+                throw "Not known type of set " + json.type;
             }
         }
     };
