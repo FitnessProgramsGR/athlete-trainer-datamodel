@@ -1,9 +1,8 @@
 /**
  * Exports for using the Datamodel
  */
-export { Serializable } from "./src/helpers";
-export { Athlete, AthleteId, AthleteJSON } from "./src/athlete";
-export { ExerciseTypes, SingleSetExercise, MultiSetExercise, ExerciseJSON, ExerciseEntry, ExerciseEntryId, ExerciseEntryJSON, Muscle, MuscleJSON, } from "./src/exercise";
-export { WeeklyProgramm, WeeklyProgrammJSON, Categories, ExerciseCategory, ExerciseCategoryJSON, Round, Superset, Serial, AnyExerciseCategory, ProgramSection, ProgramSectionJSON, ProgramJSON, EMPTY_DAY_ID, REST_DAY_ID } from "./src/programm";
-export { Trainer, TrainerId, TrainerJSON } from "./src/trainer";
-export { MediaEntryJSON, MediaEntryType, AnyMediaEntry, ImageMedia, VideoMedia } from "./src/media";
+export { Athlete } from "./src/athlete";
+export { ExerciseTypes, ExerciseEntry, Muscle, } from "./src/exercise";
+export { Program } from "./src/programm";
+export { Trainer } from "./src/trainer";
+export { MediaEntryType } from "./src/media";
