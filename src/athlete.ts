@@ -9,9 +9,24 @@ export interface AthleteJSON {
   surname: string;
   fullname: string;
   age: number;
-  oktaId: string;
   type: string;
   trainer: string;
+  img?: string,
+  email?: string,
+  tel?:string
+  weight?: {
+    value: number,
+    metric: string
+  },
+  height?: {
+    value: number,
+    metric: string
+  }
+  social?: Record<string, string>
+  meta?: {
+    favouriteFood: string,
+    [key:string]: string
+  }
   program: WeeklyProgrammJSON | undefined;
 }
 
@@ -21,7 +36,6 @@ export class Athlete extends User {
     name: string,
     surname: string,
     age: number,
-    oktaId: string,
     public trainer: string,
     public program?: WeeklyProgramm
   ) {
@@ -88,7 +102,6 @@ export class Athlete extends User {
       json.name,
       json.surname,
       json.age,
-      json.oktaId,
       json.trainer,
       json.program ? WeeklyProgramm.prototype.fromJSON(json.program) : undefined
     );
