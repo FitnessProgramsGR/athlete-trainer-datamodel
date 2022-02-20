@@ -1,4 +1,5 @@
-import { ExerciseInstance } from "./exercise";
+import { MultiSetExerciseInstance, RoundExerciseInstance, SingleSetExerciseInstance } from "./exercise";
+export declare type AnyExerciseInstance = MultiSetExerciseInstance | SingleSetExerciseInstance | RoundExerciseInstance;
 export interface Program {
     id: string;
     trainer: string;
@@ -10,7 +11,7 @@ export interface Program {
         sections: {
             id: string;
             name: string;
-            exercises: ExerciseInstance[];
+            exercises: AnyExerciseInstance[];
         }[];
     }[];
 }

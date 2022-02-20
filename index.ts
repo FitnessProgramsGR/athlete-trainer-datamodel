@@ -5,7 +5,9 @@
 export { Athlete } from "./src/athlete";
 
 export {
-  ExerciseTypes,
+  MultiSetExerciseInstance,
+  SingleSetExerciseInstance,
+  RoundExerciseInstance,
   ExerciseEntry,
   Muscle,
 } from "./src/exercise";

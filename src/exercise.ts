@@ -12,10 +12,24 @@ export interface ExerciseEntry {
   trainer: string;
 }
 
-export interface ExerciseInstance {
+export interface MultiSetExerciseInstance {
   id: string;
+  exercise: string, //ExerciseEntry.id
   reps: number[];
-  type: ExerciseTypes;
+  type: "multiset";
 }
 
-export type ExerciseTypes = "multiset" | "singleset";
+export interface SingleSetExerciseInstance {
+  id: string;
+  exercise: string, //ExerciseEntry.id
+  reps: number;
+  type: "singleset";
+}
+
+export interface RoundExerciseInstance {
+  id: string,
+  exercises: SingleSetExerciseInstance[],
+  rounds: number;
+  type: "rounds"
+}
+

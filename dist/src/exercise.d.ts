@@ -10,9 +10,21 @@ export interface ExerciseEntry {
     media: MediaEntry[];
     trainer: string;
 }
-export interface ExerciseInstance {
+export interface MultiSetExerciseInstance {
     id: string;
+    exercise: string;
     reps: number[];
-    type: ExerciseTypes;
+    type: "multiset";
 }
-export declare type ExerciseTypes = "multiset" | "singleset";
+export interface SingleSetExerciseInstance {
+    id: string;
+    exercise: string;
+    reps: number;
+    type: "singleset";
+}
+export interface RoundExerciseInstance {
+    id: string;
+    exercises: SingleSetExerciseInstance[];
+    rounds: number;
+    type: "rounds";
+}
