@@ -13,7 +13,8 @@ export {
 } from "./src/exercise";
 
 export {
-  Program
+  Program,
+  AnyExerciseInstance
 } from "./src/programm";
 
 export { Trainer } from "./src/trainer";
