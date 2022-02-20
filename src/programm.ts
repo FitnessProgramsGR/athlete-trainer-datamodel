@@ -4,6 +4,7 @@ export type AnyExerciseInstance = MultiSetExerciseInstance | SingleSetExerciseIn
 export interface Program {
   id:string,
   trainer: string,
+  name: string,
   workouts: {
     id: string, //unique id of the workout
     days: string[], //when it is assigned

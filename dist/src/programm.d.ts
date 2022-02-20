@@ -3,6 +3,7 @@ export declare type AnyExerciseInstance = MultiSetExerciseInstance | SingleSetEx
 export interface Program {
     id: string;
     trainer: string;
+    name: string;
     workouts: {
         id: string;
         days: string[];
