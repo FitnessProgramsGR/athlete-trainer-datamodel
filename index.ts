@@ -14,7 +14,9 @@ export {
 
 export {
   Program,
-  AnyExerciseInstance
+  AnyExerciseInstance,
+  Section,
+  Workout
 } from "./src/programm";
 
 export { Trainer } from "./src/trainer";
