@@ -8,6 +8,7 @@ export interface ExerciseEntry {
     description: string;
     muscles: Muscle[];
     media: MediaEntry[];
+    equipment: string[];
     trainer: string;
 }
 export interface MultiSetExerciseInstance {
@@ -21,10 +22,4 @@ export interface SingleSetExerciseInstance {
     exercise: string;
     reps: number;
     type: "singleset";
-}
-export interface RoundExerciseInstance {
-    id: string;
-    exercises: SingleSetExerciseInstance[];
-    rounds: number;
-    type: "rounds";
 }
