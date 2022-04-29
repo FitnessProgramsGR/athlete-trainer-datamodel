@@ -13,16 +13,13 @@ export interface ExerciseEntry {
   trainer: string;
 }
 
-export interface MultiSetExerciseInstance {
-  id: string;
-  exercise: string, //ExerciseEntry.id
-  reps: number[];
-  type: "multiset";
+export interface ExerciseInstance {
+
 }
 
-export interface SingleSetExerciseInstance {
+export interface ExerciseInstance {
   id: string;
   exercise: string, //ExerciseEntry.id
-  reps: number;
-  type: "singleset";
+  reps: number[] | number;
+  type: "multiset" | 'singleset';
 }

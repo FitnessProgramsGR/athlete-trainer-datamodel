@@ -1,6 +1,5 @@
-import { MultiSetExerciseInstance, SingleSetExerciseInstance } from "./exercise";
+import { ExerciseInstance } from "./exercise";
 
-export type AnyExerciseInstance = MultiSetExerciseInstance | SingleSetExerciseInstance
 
 export interface Workout {
   id: string, //unique id of the workout
@@ -8,6 +7,7 @@ export interface Workout {
   days: string[], //when it is assigned
   intensity?: number, //how intense the workout is (optional)
   meta?: Record<string,any>, //metadata (anything the user wants to add)
+  equipment: string[],
   sections: Section[]
 }
 
@@ -16,7 +16,8 @@ export interface Section {
     id: string,
     name: string,
     rounds?: number,
-    exercises: AnyExerciseInstance[]
+    type: 'serial' | 'rounds',
+    exercises: ExerciseInstance[]
 }
 
 export interface Program {

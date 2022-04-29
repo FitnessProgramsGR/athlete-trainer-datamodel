@@ -1,12 +1,13 @@
 import { Athlete } from "./athlete";
+import { Section, Workout } from "./programm";
 export interface Trainer {
     id: string;
     name: string;
     surname: string;
-    fullname: string;
     age: number;
-    oktaId: string;
     type: string;
     athletes: Athlete[];
+    workouts: Workout[];
+    sections: Section[];
     library?: string[];
 }

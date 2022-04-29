@@ -5,15 +5,12 @@
 export { Athlete } from "./src/athlete";
 
 export {
-  MultiSetExerciseInstance,
-  SingleSetExerciseInstance,
   ExerciseEntry,
   Muscle,
 } from "./src/exercise";
 
 export {
   Program,
-  AnyExerciseInstance,
   Section,
   Workout
 } from "./src/programm";

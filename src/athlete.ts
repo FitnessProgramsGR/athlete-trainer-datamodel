@@ -23,5 +23,5 @@ export interface Athlete {
     favouriteFood: string,
     [key:string]: string
   }
-  program?: Program[] | undefined;
+  program?: Program
 }

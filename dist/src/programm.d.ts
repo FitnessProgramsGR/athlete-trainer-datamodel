@@ -1,18 +1,19 @@
-import { MultiSetExerciseInstance, SingleSetExerciseInstance } from "./exercise";
-export declare type AnyExerciseInstance = MultiSetExerciseInstance | SingleSetExerciseInstance;
+import { ExerciseInstance } from "./exercise";
 export interface Workout {
     id: string;
     name: string;
     days: string[];
     intensity?: number;
     meta?: Record<string, any>;
+    equipment: string[];
     sections: Section[];
 }
 export interface Section {
     id: string;
     name: string;
     rounds?: number;
-    exercises: AnyExerciseInstance[];
+    type: 'serial' | 'rounds';
+    exercises: ExerciseInstance[];
 }
 export interface Program {
     id: string;

@@ -11,15 +11,11 @@ export interface ExerciseEntry {
     equipment: string[];
     trainer: string;
 }
-export interface MultiSetExerciseInstance {
-    id: string;
-    exercise: string;
-    reps: number[];
-    type: "multiset";
+export interface ExerciseInstance {
 }
-export interface SingleSetExerciseInstance {
+export interface ExerciseInstance {
     id: string;
     exercise: string;
-    reps: number;
-    type: "singleset";
+    reps: number[] | number;
+    type: "multiset" | 'singleset';
 }
