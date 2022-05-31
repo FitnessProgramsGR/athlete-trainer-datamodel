@@ -1,3 +1,4 @@
+import { Athlete } from "./athlete";
 import { Section, Workout } from "./programm";
 export interface Trainer {
     id: string;
@@ -5,7 +6,7 @@ export interface Trainer {
     surname: string;
     age: number;
     type: string;
-    athletes: string[];
+    athletes: Athlete[];
     workouts: Workout[];
     sections: Section[];
     library?: string[];
