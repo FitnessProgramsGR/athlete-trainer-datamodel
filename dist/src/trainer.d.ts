@@ -4,6 +4,7 @@ export interface Trainer {
     id: string;
     name: string;
     surname: string;
+    email: string;
     age: number;
     type: string;
     athletes: Athlete[];
