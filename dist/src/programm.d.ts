@@ -14,6 +14,7 @@ export interface Section {
     rounds?: number;
     type: 'serial' | 'rounds';
     exercises: ExerciseInstance[];
+    note?: string;
 }
 export interface Program {
     id: string;

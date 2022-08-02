@@ -17,7 +17,8 @@ export interface Section {
     name: string,
     rounds?: number,
     type: 'serial' | 'rounds',
-    exercises: ExerciseInstance[]
+    exercises: ExerciseInstance[],
+    note?: string
 }
 
 export interface Program {
