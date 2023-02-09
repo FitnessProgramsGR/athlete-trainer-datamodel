@@ -5,7 +5,7 @@ export interface ExtraInfoFields {
   default?: string
 }
 
-export interface TrainningStyle {
+export interface TrainingStyle {
   name: string;
   id: string;
   type: "serial" | "rounds" | "tabata" | "combo";

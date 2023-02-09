@@ -1,4 +1,5 @@
 import { ExerciseInstance } from "./exercise";
+import { TrainingStyle } from "./trainingStyles";
 export interface Workout {
     id: string;
     name: string;
@@ -12,6 +13,7 @@ export interface Section {
     id: string;
     name: string;
     rounds?: number;
+    trainingStyle: TrainingStyle;
     type: "serial" | "rounds" | "tabata" | "combo";
     exercises: ExerciseInstance[];
     note?: string;
