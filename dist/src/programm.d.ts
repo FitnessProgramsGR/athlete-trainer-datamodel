@@ -2,17 +2,17 @@ import { ExerciseInstance } from "./exercise";
 export interface Workout {
     id: string;
     name: string;
-    days: string[];
+    days?: string[];
     intensity?: number;
     meta?: Record<string, any>;
-    equipment: string[];
+    equipment?: string[];
     sections: Section[];
 }
 export interface Section {
     id: string;
     name: string;
     rounds?: number;
-    type: 'serial' | 'rounds';
+    type: "serial" | "rounds" | "tabata" | "combo";
     exercises: ExerciseInstance[];
     note?: string;
 }

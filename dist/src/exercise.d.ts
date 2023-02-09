@@ -12,10 +12,8 @@ export interface ExerciseEntry {
     trainer: string;
 }
 export interface ExerciseInstance {
-}
-export interface ExerciseInstance {
     id: string;
     exercise: string;
     reps: number[] | number;
-    type: "multiset" | 'singleset';
+    weight?: number[] | number;
 }

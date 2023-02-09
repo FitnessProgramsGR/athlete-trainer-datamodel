@@ -1,4 +1,5 @@
 import { MediaEntry } from "./media";
+import { TrainningStyle } from "./trainningStyles";
 
 export interface Muscle {
   name: string;
@@ -14,12 +15,8 @@ export interface ExerciseEntry {
 }
 
 export interface ExerciseInstance {
-
-}
-
-export interface ExerciseInstance {
   id: string;
-  exercise: string, //ExerciseEntry.id
+  exercise: string; //ExerciseEntry.id
   reps: number[] | number;
-  type: "multiset" | 'singleset';
+  weight?: number[] | number;
 }
