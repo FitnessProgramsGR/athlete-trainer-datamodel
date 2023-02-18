@@ -1,22 +1,23 @@
-export interface ExtraInfoFields {
+export interface ExtraInfoField {
   field: string;
   displayField: string;
   description: string;
-  default?: string
+  default?: string;
+  options: string[];
+  value?: string;
 }
 
 export interface TrainingStyle {
   name: string;
   id: string;
   type: "serial" | "rounds" | "tabata" | "combo";
-  fields?: ExtraInfoFields[];
-  availableMetrics?: string[];
-  exerciseLimit?: number,
-  fixedRounds?:number,
-  fixedReps?: number,
-  fixedMetric?: string,
-  fixedWeight?: number,
-  fixedWeightDelta?: number,
-  fixedRepsDelta?: number
-  description?: string
+  fields?: ExtraInfoField[];
+  exerciseLimit?: number;
+  fixedRounds?: number;
+  fixedReps?: number;
+  fixedMetric?: string;
+  fixedWeight?: number;
+  fixedWeightDelta?: number;
+  fixedRepsDelta?: number;
+  description?: string;
 }

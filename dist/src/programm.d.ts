@@ -3,9 +3,7 @@ import { TrainingStyle } from "./trainingStyles";
 export interface Workout {
     id: string;
     name: string;
-    days?: string[];
     intensity?: number;
-    meta?: Record<string, any>;
     equipment?: string[];
     sections: Section[];
 }

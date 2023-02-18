@@ -7,8 +7,8 @@ export interface Trainer {
   email: string;
   age: number;
   type: string;
-  athletes: Athlete[];
-  workouts: Workout[];
-  sections: Section[];
+  athletes?: Athlete[];
+  workouts?: Workout[];
+  sections?: Section[];
   library?: string[] //library of bought exercise packages
 }

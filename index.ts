@@ -12,4 +12,4 @@ export { Trainer } from "./src/trainer";
 
 export { MediaEntryType } from "./src/media";
 
-export { TrainingStyle, ExtraInfoFields } from "./src/trainingStyles";
+export { TrainingStyle, ExtraInfoField } from "./src/trainingStyles";

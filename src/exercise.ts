@@ -1,5 +1,4 @@
 import { MediaEntry } from "./media";
-import { TrainingStyle } from "./trainingStyles";
 
 export interface Muscle {
   name: string;
