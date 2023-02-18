@@ -3,8 +3,9 @@ export interface ExtraInfoField {
   displayField: string;
   description: string;
   default?: string;
-  options: string[];
+  options?: string[];
   value?: string;
+  widget: string;
 }
 
 export interface TrainingStyle {
