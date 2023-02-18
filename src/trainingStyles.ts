@@ -5,7 +5,7 @@ export interface ExtraInfoField {
   default?: string;
   options?: string[];
   value?: string;
-  widget: string;
+  widget: "input" | "delta" | "select" | "numericInput";
   fixedMetric?: string;
 }
 
