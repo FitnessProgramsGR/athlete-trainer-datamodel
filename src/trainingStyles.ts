@@ -6,6 +6,7 @@ export interface ExtraInfoField {
   options?: string[];
   value?: string;
   widget: string;
+  fixedMetric?: string;
 }
 
 export interface TrainingStyle {
